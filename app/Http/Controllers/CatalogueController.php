@@ -222,7 +222,7 @@ class CatalogueController extends Controller
         return response()->json(['Error' => 'Unauthorized'], 401);        
     }
 
-    function getCatalogueByCustomer(Request $request)
+    function getCataloguesByCustomer(Request $request)
     {
         if($request->isJson())
         {
@@ -235,7 +235,41 @@ class CatalogueController extends Controller
                     ->select('customers.name as customer_name', 'products.name as product_name', 'catalogues.quantity')
                     ->get();
 
-            dd($users);
+            $count = count($users);
+
+            if ($count) 
+            {
+                return response()->json($users, 200);
+            }
+            return response()->json(['Error' => 'No Found tuples.'], 400);
+        }
+
+        return response()->json(['Error' => 'Unauthorized'], 401);
+    }
+
+    function getCatalogueCustomer(Request $request)
+    {
+        if($request->isJson())
+        {
+            $data = $request->json()->all();
+
+            $users = DB::table('catalogues')
+                    ->where([
+                             ['customers.isClientTo', '=', $data['id_integrator']],
+                             ['catalogues.customer_id', '=', $data['id_customer']],
+                            ])
+                    ->join('customers', 'catalogues.customer_id', '=', 'customers.id_user')
+                    ->join('products', 'catalogues.product_id', '=', 'products.id')
+                    ->select('customers.name as customer_name', 'products.name as product_name', 'catalogues.quantity')
+                    ->get();
+
+            $count = count($users);
+
+            if ($count) 
+            {
+                return response()->json($users, 200);
+            }
+            return response()->json(['Error' => 'No Found tuples.'], 400);
         }
 
         return response()->json(['Error' => 'Unauthorized'], 401);

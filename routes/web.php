@@ -35,4 +35,5 @@ $router->post('/createProduct', ['uses' => 'ProductController@storeProduct']);
 $router->post('/createCatalogue', ['uses' => 'CatalogueController@storeCatalogue']);
 $router->post('/addInventary', ['uses' => 'CatalogueController@AddStock']);
 $router->post('/takedownInventary', ['uses' => 'CatalogueController@takeDown']);
-$router->get('/catalogueByCustomer', ['uses' => 'CatalogueController@getCatalogueByCustomer']);
+$router->get('/cataloguesByCustomer', ['uses' => 'CatalogueController@getCataloguesByCustomer']);
+$router->get('/catalogueCustomer', ['uses' => 'CatalogueController@getCatalogueCustomer']);
