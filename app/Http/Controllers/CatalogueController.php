@@ -25,10 +25,12 @@ class CatalogueController extends Controller
         {
             $data = $request->json()->all();
 
-            $catalogues = DB::table('catalogues')->where([
-                ['customer_id', '=', $data['customer_id']],
-                ['product_id', '=', $data['product_id']],
-            ])->get();
+            $catalogues = DB::table('catalogues')
+                            ->where([
+                                        ['customer_id', '=', $data['customer_id']],
+                                        ['product_id', '=', $data['product_id']],
+                                    ])
+                            ->get();
 
             $isRegister = count($catalogues);
 
@@ -69,10 +71,12 @@ class CatalogueController extends Controller
         {
             $data = $request->json()->all();
 
-            $catalogues = DB::table('catalogues')->where([
-                ['customer_id', '=', $data['customer_id']],
-                ['product_id', '=', $data['product_id']],
-            ])->get();
+            $catalogues = DB::table('catalogues')
+                            ->where([
+                                        ['customer_id', '=', $data['customer_id']],
+                                        ['product_id', '=', $data['product_id']],
+                                    ])
+                            ->get();
 
             $isRegister = count($catalogues);
 

@@ -37,3 +37,6 @@ $router->post('/addInventary', ['uses' => 'CatalogueController@AddStock']);
 $router->post('/takedownInventary', ['uses' => 'CatalogueController@takeDown']);
 $router->get('/cataloguesByCustomer', ['uses' => 'CatalogueController@getCataloguesByCustomer']);
 $router->get('/catalogueCustomer', ['uses' => 'CatalogueController@getCatalogueCustomer']);
+
+// NOTIFY Routes
+$router->get('/getNotify', ['uses' => 'IntegratorController@getNotify']);
