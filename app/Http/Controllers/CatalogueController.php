@@ -221,4 +221,23 @@ class CatalogueController extends Controller
         
         return response()->json(['Error' => 'Unauthorized'], 401);        
     }
+
+    function getCatalogueByCustomer(Request $request)
+    {
+        if($request->isJson())
+        {
+            $data = $request->json()->all();
+
+            $users = DB::table('catalogues')
+                    ->where('customers.isClientTo', '=', $data['id_integrator'])
+                    ->join('customers', 'catalogues.customer_id', '=', 'customers.id_user')
+                    ->join('products', 'catalogues.product_id', '=', 'products.id')
+                    ->select('customers.name as customer_name', 'products.name as product_name', 'catalogues.quantity')
+                    ->get();
+
+            dd($users);
+        }
+
+        return response()->json(['Error' => 'Unauthorized'], 401);
+    }
 }
